@@ -1,15 +1,17 @@
 <script setup>
 
-import { Head, Link } from "@inertiajs/vue3";
+import {Head, Link, router} from "@inertiajs/vue3";
 import { usePage } from "@inertiajs/vue3";
-import { computed } from "vue";
+import {computed, reactive} from "vue";
 import MainLayout from "@/Layouts/MainLayout.vue";
 
 defineOptions({ layout: MainLayout })
 
 const posts = computed(() => usePage().props.posts);
 
-
+function submit(id) {
+    router.delete(route('posts.destroy', id))
+}
 
 </script>
 
@@ -32,6 +34,12 @@ const posts = computed(() => usePage().props.posts);
             <Link :href="route('posts.show', post.id)" class="hover:text-green-500 text-red-700 block text-right">
                 Show
             </Link>
+            <Link :href="route('posts.edit', post.id)" class="hover:text-green-500 text-red-700 block text-right">
+                Edit
+            </Link>
+            <form @submit.prevent="submit(post.id)">
+                <button class="hover:text-green-500 text-red-700 block ml-auto" type="submit">Delete</button>
+            </form>
             <p class="text-right">{{ post.date }}</p>
         </div>
     </div>
