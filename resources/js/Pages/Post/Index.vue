@@ -29,21 +29,29 @@ function submit(id) {
     </div>
     <div v-if="posts">
         <div v-for="post in posts" class="border-t border-gray-500 mb-6 text-sky-500">
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.content }}</p>
-            <Link :href="route('posts.show', post.id)" class="hover:text-green-500 text-red-700 block text-right">
-                Show
-            </Link>
-            <Link :href="route('posts.edit', post.id)" class="hover:text-green-500 text-red-700 block text-right">
-                Edit
-            </Link>
-            <form @submit.prevent="submit(post.id)">
-                <button class="hover:text-green-500 text-red-700 block ml-auto" type="submit">Delete</button>
-            </form>
-            <p class="text-right">{{ post.date }}</p>
+            <div class="flex justify-between">
+                <div>
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.content }}</p>
+                </div>
+                <div>
+                    <Link :href="route('posts.show', post.id)" class="hover:text-green-500 text-red-700 block text-right ">
+                        Show
+                    </Link>
+                    <Link :href="route('posts.edit', post.id)" class="hover:text-green-500 text-red-700 block text-right ">
+                        Edit
+                    </Link>
+                    <form @submit.prevent="submit(post.id)">
+                        <button class="hover:text-red-500 text-red-700 block ml-auto" type="submit">Delete</button>
+                    </form>
+                    <p class="text-right">{{ post.date }}</p>
+                </div>
+            </div>
         </div>
     </div>
-
+    <div class="text-center">
+        <Link :href="route('home')" class="hover:text-green-500 text-red-800">Home</Link>
+    </div>
 </template>
 
 <style scoped>
